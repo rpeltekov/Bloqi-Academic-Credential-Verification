@@ -42,7 +42,9 @@ class LandingPage extends Component {
     render(props) {
         return (
             <div>
-
+                <header>
+                    Welcome to Bloqi!
+                </header>
             </div>
         );
     }

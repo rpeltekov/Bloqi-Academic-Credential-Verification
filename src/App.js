@@ -3,9 +3,12 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
 import { Component } from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import LandingPage from "./components/LandingPage/LandingPage";
+import UserDashboard from "./components/UserDashboard/UserDashboard";
+import OrganizationDashboard from "./components/OrganizationDashboard/OrganizationDashboard.js";
+
 
 class App extends Component {
 
@@ -15,7 +18,6 @@ class App extends Component {
                 <div>
                     <Switch>
                         <Route exact path="/" component={LandingPage} />
-                        <Route exact path="/Register" component={Register} />
                         <Route
                             exact path="/UserDashboard"
                             render={(props) => <UserDashboard {...props} />}
@@ -24,7 +26,6 @@ class App extends Component {
                             exact path="/OrganizationDashboard"
                             render={(props) => <OrganizationDashboard {...props} />}
                         />
-                        <Route component={NotFound} />
                     </Switch>
                 </div>
             </Router>
