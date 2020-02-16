@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as ROUTES from '../../constants/routes';
+import { Button, Alert, Container, Row, Col } from 'react-bootstrap';
 
 class LandingPage extends Component {
     constructor(props) {
@@ -45,6 +46,9 @@ class LandingPage extends Component {
                 <header>
                     Welcome to Bloqi!
                 </header>
+                <div className="button1">
+                    <Button onClick={this.login} outline color="white" className="text-black">Login</Button>
+                </div>
             </div>
         );
     }
