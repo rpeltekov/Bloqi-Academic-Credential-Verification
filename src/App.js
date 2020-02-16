@@ -6,7 +6,6 @@ import Form from 'react-bootstrap/Form';
 import { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LandingPage from "./components/LandingPage/LandingPage";
-import UserDashboard from "./components/UserDashboard/UserDashboard";
 import OrganizationDashboard from "./components/OrganizationDashboard/OrganizationDashboard.js";
 
 
@@ -18,10 +17,6 @@ class App extends Component {
                 <div>
                     <Switch>
                         <Route exact path="/" component={LandingPage} />
-                        <Route
-                            exact path="/UserDashboard"
-                            render={(props) => <UserDashboard {...props} />}
-                        />
                         <Route
                             exact path="/OrganizationDashboard"
                             render={(props) => <OrganizationDashboard {...props} />}

@@ -26,4 +26,4 @@ const InputFile = () => {
     );
 };
 
-//export default InputFile;
+export default InputFile;
