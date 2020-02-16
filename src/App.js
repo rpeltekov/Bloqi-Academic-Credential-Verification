@@ -1,26 +1,56 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
+import { Component } from 'react';
+import { Route, IndexRoute } from 'react-router';
+
+/**
+ * Import all page components here
+ */
+// import App from './components/App';
+// import MainPage from './components/MainPage';
+// import SomePage from './components/SomePage';
+// import SomeOtherPage from './components/SomeOtherPage';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <header className="App-header">
+                { /* <img src={logo} className="App-logo" alt="logo" /> */}
+                <p>
+                    Upload your transcript here.
+                </p>
+                <font size="2">upload file here</font>
+                <Form>
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Full name of institution</Form.Label>
+                        <Form.Control rows="1"
+                                      type="text"
+                                      placeholder="e.g. University of California - Berkeley"
+                        />
+                    </Form.Group>
+
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Candidate full name</Form.Label>
+                        <Form.Control rows="1"
+                                      type="text"
+                                      placeholder="e.g. Ashley Apple"
+                        />                    </Form.Group>
+
+                    <Button variant="primary" type="submit">
+                        Upload for authentication
+                    </Button>
+                </Form>
+                { /* file upload */}
+                { /* name, authenticator/institute, cert hash */}
+
+            </header>
+        </div>
+    );
 }
 
 export default App;
