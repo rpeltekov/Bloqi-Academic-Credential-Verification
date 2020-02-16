@@ -1,6 +1,6 @@
 export const CLIENT_ID = "4bdbb115-4940-407b-bfe3-053cb306dded";
 export const MICROSOFT_ACNT = "rpeltekovgmail.onmicrosoft.com";
-export const LOGIN_REDIRECT_URL = "http%3A%2F%2Flocalhost:3000%2FLoading";
+export const LOGIN_REDIRECT_URL = "http%3A%2F%2Flocalhost%3A3000%2FLoader";
 export const LOGIN_REDIRECT_URL_ONBOARD =
     "http%3A%2F%2Flocalhost:3000%2FOnboarding";
 export const SCOPE =

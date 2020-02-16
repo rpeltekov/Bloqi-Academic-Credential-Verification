@@ -7,7 +7,8 @@ import { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LandingPage from "./components/LandingPage/LandingPage";
 import OrganizationDashboard from "./components/OrganizationDashboard/OrganizationDashboard.js";
-
+import Loader from "./components/Loader/Loader";
+import UserDashboard from "./components/UserDashboard/UserDashboard";
 
 class App extends Component {
 
@@ -20,6 +21,14 @@ class App extends Component {
                         <Route
                             exact path="/OrganizationDashboard"
                             render={(props) => <OrganizationDashboard {...props} />}
+                        />
+                        <Route
+                            exact path="/Loader"
+                            render={(props) => <Loader {...props} />}
+                        />
+                        <Route
+                            exact path="/UserDashboard"
+                            render={(props) => <UserDashboard {...props} />}
                         />
                     </Switch>
                 </div>

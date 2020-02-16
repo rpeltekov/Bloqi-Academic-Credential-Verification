@@ -36,7 +36,10 @@ class LandingPage extends Component {
         this.props.history.push("/Register");
     };
 
-    login = () => {
+    login1 = () => {
+        window.location.href = ROUTES.LOGIN;
+    };
+    login2 = () => {
         window.location.href = ROUTES.LOGIN;
     };
 
@@ -47,7 +50,10 @@ class LandingPage extends Component {
                     Welcome to Bloqi!
                 </header>
                 <div className="button1">
-                    <Button onClick={this.login} outline color="white" className="text-black">Login</Button>
+                    <Button onClick={this.login1} outline color="white" className="text-black">Login User</Button>
+                </div>
+                <div className="button1">
+                    <Button onClick={this.login2} outline color="white" className="text-black">Login Institution</Button>
                 </div>
             </div>
         );
