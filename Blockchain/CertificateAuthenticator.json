@@ -1,5 +1,5 @@
 {
-  "ApplicationName": "CertificateAuthenticaor",
+  "ApplicationName": "CertificateAuthenticator",
   "DisplayName": "Certificate Authenticator!",
   "Description": "A simple application to check the validity of educational certificates and diplomas",
   "ApplicationRoles": [
@@ -53,14 +53,6 @@
           }
         },
         {
-          "Name": "CertificateExpirationTimestamp",
-          "DisplayName": "Certificate Expiration Timestamp",
-          "Description": "Timestamp when the certificate expires.",
-          "Type": {
-            "Name": "time"
-          }
-        },
-        {
           "Name": "CertificateOwner",
           "DisplayName": "Certificate Owner",
           "Description": "Name of the owner of the certificate.",
@@ -77,14 +69,6 @@
             "DisplayName": "Certificate Hash",
             "Type": {
               "Name": "int"
-            }
-          },
-          {
-            "Name": "timeStamp",
-            "Description": "Timestamp of the expiration",
-            "DisplayName": "Time Stamp",
-            "Type": {
-              "Name": "time"
             }
           },
           {
@@ -114,26 +98,29 @@
           ]
         },
         {
-          "Name": "getHash",
-          "DisplayName": "getHash",
-          "Description": "Get hash of the certificate",
-          "Parameters": []
-        },
-        {
-          "Name": "getDate",
-          "DisplayName": "getDate",
-          "Description": "Get expiration date of the certificate.",
-          "Parameters": []
+          "Name": "verifyHash",
+          "DisplayName": "Verify Hash",
+          "Description": "Verify hash of the certificate",
+          "Parameters": [
+            {
+              "Name": "check",
+              "Description": "Hash to check against.",
+              "DisplayName": "Hash Val",
+              "Type": {
+                "Name": "int"
+              }
+            }
+          ]
         },
         {
           "Name": "checkAuthenticator",
-          "DisplayName": "checkAuthenticator",
+          "DisplayName": "check Authenticator",
           "Description": "Check the authenticator of the certificate.",
           "Parameters": [
             {
               "Name": "check",
               "Description": "Address with which to cross check authenticator",
-              "DisplayName": "CheckAddress",
+              "DisplayName": "Check Address",
               "Type": {
                 "Name": "address"
               }
@@ -157,10 +144,10 @@
           "Style": "Success",
           "Transitions": [
             {
-              "AllowedRoles": ["Invalid"],
+              "AllowedRoles": ["Authenticator"],
               "AllowedInstanceRoles": ["Authenticator"],
               "Description": "...",
-              "Function": "ChangeStatus",
+              "Function": "changeStatus",
               "NextStates": [ "Invalid" ],
               "DisplayName": "Invalid"
             }
@@ -175,8 +162,8 @@
           "Style": "Success",
           "Transitions": [
             {
-              "AllowedRoles": [],
-              "AllowedInstanceRoles": ["Active"],
+              "AllowedRoles": ["Authenticator"],
+              "AllowedInstanceRoles": ["Authenticator"],
               "Description": "...",
               "Function": "changeStatus",
               "NextStates": [ "Active" ],
