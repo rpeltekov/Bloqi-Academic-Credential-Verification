@@ -1,7 +1,7 @@
 pragma solidity >=0.4.25 <0.6.0;
 
 contract CertificateAuthenticator {
-    enum StateType { Valid, Invalid }
+    enum StateType { Active, Invalid }
 
     Statetype public State;
     address public Authenticator;
@@ -9,14 +9,23 @@ contract CertificateAuthenticator {
 
     uint256 public CertificateHash;
     uint256 public CertificateExpirationTimestamp;
+    string public CertificateOwner;
 
-
-    constructor(uint256 memory cert, uint256 memory timeStamp) public {
+    constructor(uint256 memory cert, uint256 memory timeStamp, string memory name) public {
         Authenticator = msg.sender;
         CertificateHash = cert;
         CertificateExpirationTimestamp = timeStamp;
+        CertificateOwner = name;
         if (block.timestamp < ticketExpiryDateTimestamp) {
-            State = StateType.Valid;
+            State = StateType.Active;
+        } else {
+            State = StateType.Invalid;
+        }
+    }
+
+    function changeStatus(bool memory stat) public {
+        if (stat) {
+            State = StateType.Active;
         } else {
             State = StateType.Invalid;
         }
@@ -24,25 +33,25 @@ contract CertificateAuthenticator {
 
     function getHash() public view returns (uint256) {
         require(block.timestamp < ticketExpiryDateTimestamp);
+        require(State == StateType.Active);
         return CertificateHash;
     }
 
     function getDate() public view returns (uint256) {
         require(block.timestamp < ticketExpiryDateTimestamp);
+        require(State == StateType.Active);
         return CertificateDate;
     }
 
     function checkAuthenticator(address check) public view returns (bool) {
         require(block.timestamp < ticketExpiryDateTimestamp);
+        require(State == StateType.Active);
         return check == Authenticator;
     }
 
     function checkValid() public view returns (bool) {
         require(block.timestamp < ticketExpiryDateTimestamp);
-        if (State == StateType.Valid) {
-            return true;
-        } else {
-            return false;
-        }
+        require(State == StateType.Active);
+        return State = StateType.Active;
     }
 }

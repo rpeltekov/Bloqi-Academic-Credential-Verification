@@ -1,0 +1,190 @@
+{
+  "ApplicationName": "CertificateAuthenticaor",
+  "DisplayName": "Certificate Authenticator!",
+  "Description": "A simple application to check the validity of educational certificates and diplomas",
+  "ApplicationRoles": [
+    {
+      "Name": "Authenticator",
+      "Description": "An institution sending authorized certificate."
+    },
+    {
+      "Name": "Requester",
+      "Description": "A person requesting verification"
+    }
+  ],
+  "Workflows": [
+    {
+      "Name": "CertificateAuthenticator",
+      "DisplayName": "Request Response",
+      "Description": "A simple workflow to send a request and receive a response.",
+      "Initiators": [ "Authenticator" ],
+      "StartState": "Active",
+      "Properties": [
+        {
+          "Name": "State",
+          "DisplayName": "State",
+          "Description": "Holds the state of the contract.",
+          "Type": {
+            "Name": "state"
+          }
+        },
+        {
+          "Name": "Authenticator",
+          "DisplayName": "Requestor",
+          "Description": "An institution documenting a certificate for a person",
+          "Type": {
+            "Name": "Authenticator"
+          }
+        },
+        {
+          "Name": "Requester",
+          "DisplayName": "Requester",
+          "Description": "An entity requesting validation of certificate.",
+          "Type": {
+            "Name": "Requester"
+          }
+        },
+        {
+          "Name": "CertificateHash",
+          "DisplayName": "Certificate Hash",
+          "Description": "Hash of the certificate.",
+          "Type": {
+            "Name": "int"
+          }
+        },
+        {
+          "Name": "CertificateExpirationTimestamp",
+          "DisplayName": "Certificate Expiration Timestamp",
+          "Description": "Timestamp when the certificate expires.",
+          "Type": {
+            "Name": "time"
+          }
+        },
+        {
+          "Name": "CertificateOwner",
+          "DisplayName": "Certificate Owner",
+          "Description": "Name of the owner of the certificate.",
+          "Type": {
+            "Name": "string"
+          }
+        }
+      ],
+      "Constructor": {
+        "Parameters": [
+          {
+            "Name": "cert",
+            "Description": "Hash of the certificate.",
+            "DisplayName": "Certificate Hash",
+            "Type": {
+              "Name": "int"
+            }
+          },
+          {
+            "Name": "timeStamp",
+            "Description": "Timestamp of the expiration",
+            "DisplayName": "Time Stamp",
+            "Type": {
+              "Name": "time"
+            }
+          },
+          {
+            "Name": "name",
+            "Description": "Name of the Certificate owner.",
+            "DisplayName": "Certificate Owner",
+            "Type": {
+              "Name": "string"
+            }
+          }
+        ]
+      },
+      "Functions": [
+        {
+          "Name": "changeStatus",
+          "DisplayName": "StatusChange",
+          "Description": "Change the status of the certificate.",
+          "Parameters": [
+            {
+              "Name": "stat",
+              "Description": "Status to change to.",
+              "DisplayName": "StatusBoolean",
+              "Type": {
+                "Name": "bool"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "getHash",
+          "DisplayName": "getHash",
+          "Description": "Get hash of the certificate",
+          "Parameters": []
+        },
+        {
+          "Name": "getDate",
+          "DisplayName": "getDate",
+          "Description": "Get expiration date of the certificate.",
+          "Parameters": []
+        },
+        {
+          "Name": "checkAuthenticator",
+          "DisplayName": "checkAuthenticator",
+          "Description": "Check the authenticator of the certificate.",
+          "Parameters": [
+            {
+              "Name": "check",
+              "Description": "Address with which to cross check authenticator",
+              "DisplayName": "CheckAddress",
+              "Type": {
+                "Name": "address"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "checkValid",
+          "DisplayName": "Check Valid",
+          "Description": "Check if the contract is Valid.",
+          "Parameters": []
+        }
+      ],
+      "States": [
+        {
+          "Name": "Active",
+          "DisplayName": "Active",
+          "Description": "...",
+          "PercentComplete": 100,
+          "Value": 0,
+          "Style": "Success",
+          "Transitions": [
+            {
+              "AllowedRoles": ["Invalid"],
+              "AllowedInstanceRoles": ["Authenticator"],
+              "Description": "...",
+              "Function": "ChangeStatus",
+              "NextStates": [ "Invalid" ],
+              "DisplayName": "Invalid"
+            }
+          ]
+        },
+        {
+          "Name": "Invalid",
+          "DisplayName": "Invalid",
+          "Description": "...",
+          "PercentComplete": 100,
+          "Value": 1,
+          "Style": "Success",
+          "Transitions": [
+            {
+              "AllowedRoles": [],
+              "AllowedInstanceRoles": ["Active"],
+              "Description": "...",
+              "Function": "changeStatus",
+              "NextStates": [ "Active" ],
+              "DisplayName": "Active"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
