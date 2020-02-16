@@ -8,29 +8,31 @@ class Loader extends Component {
         console.log("in construct");
         super(props);
         var token = "";
+        var organ = null;
         if (props.location.state) {
             token = props.location.state.token;
+            organ = this.props.organ;
         }
         this.state = {
             token: token,
+            organ: organ
         };
     }
 
     componentWillMount() {
-        console.log("in component will mount");
         var token = this.state.token;
         if (token === "") {
             token = window.location.hash.split("&")[0].split("=")[1];
             console.log(token);
             this.setState({
-                token: token
+                token: token,
+                organ: this.props.organ
             });
         }
         this.getRole(token);
     }
 
     getRole = token => {
-        console.log("in getrole");
         var config = {
             headers: { Authorization: "bearer " + token }
         };
@@ -45,23 +47,16 @@ class Loader extends Component {
 
                     var roleAssignments = roleResponse.data.roleAssignments;
                     for (let i = 0; i < roleAssignments.length; i++) {
-                        //console.log(roleAssignments.length);
                         console.log(roleAssignments[i].user);
-                        this.props.history.push({
-                            pathname: "/UserDashboard",
-                            state: {
-                                token: this.state.token,
-                                userID: this.state.userID
-                            }
-                        });
                         if (roleAssignments[i].user.userID == self.state.userID) {
-                            if (roleAssignments[i].applicationRoleId == 0) {
+                            if (this.state.organization) {
                                 // is user
                                 this.props.history.push({
                                     pathname: "/UserDashboard",
                                     state: {
                                         token: this.state.token,
-                                        userID: this.state.userID
+                                        userID: this.state.userID,
+                                        organization: this.state.organization
                                     }
                                 });
                             } else {
@@ -73,7 +68,8 @@ class Loader extends Component {
                                     pathname: "/OrganizationDashboard",
                                     state: {
                                         token: this.state.token,
-                                        organizationId: this.state.organizationId
+                                        organizationId: this.state.organizationId,
+                                        organization: this.state.organization
                                     }
                                 });
                             }
@@ -90,8 +86,7 @@ class Loader extends Component {
     render() {
         return (
             <div className="all">
-                <Spinner color="primary" />
-                <header>hihihihi</header>
+                <Spinner color="primary" text-align="center"/>
             </div>
         );
     }
